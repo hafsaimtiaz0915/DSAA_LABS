@@ -3,12 +3,12 @@ using namespace std;
 
 int main()
 {
-    int N, k, count = 0;
+    int N, k, count = 0, *arr;
 
     cout << "Enter the number of Toys: ";
     cin >> N;
 
-    int arr[N];
+    arr = new int[N];
 
     cout << "Enter your Amount: ";
     cin >> k;
@@ -19,12 +19,7 @@ int main()
     {
         cout << "Toy " << i + 1 << ": Rs.";
         cin >> arr[i];
-        if (arr[i] <= k)
-        {
-            count++;
-        }
     }
-
     for (int i = 0; i < N - 1; i++)
     {
         for (int j = 0; j < N - i - 1; j++)
@@ -35,11 +30,15 @@ int main()
             }
         }
     }
-
+    int index = 0;
+    while (k > 0 && k >= arr[index])
+    {
+        k -= arr[index++];
+        count++;
+    }
     cout << "Maximum number of toys are: " << count << endl;
     cout << "The costs of toys you can buy within Rs." << k << " are: ";
     for (int i = 0; i < count; i++)
         cout << arr[i] << " ";
-
     return 0;
 }
