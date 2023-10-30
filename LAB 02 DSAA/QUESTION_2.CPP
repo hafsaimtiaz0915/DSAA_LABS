@@ -45,7 +45,7 @@ public:
             location = i;
             for (int j = i + 1; j < n; j++)
             {
-                if ((min.birth_year > people[j].birth_year) || (min.birth_year == people[j].birth_year && min.birth_month > people[j].birth_month) || (min.birth_year == people[j].birth_year && min.birth_month == people[j].birth_month && min.birth_date == people[j].birth_date))
+                if ((min.birth_year > people[j].birth_year) || (min.birth_year == people[j].birth_year && min.birth_month > people[j].birth_month) || (min.birth_year == people[j].birth_year && min.birth_month == people[j].birth_month && min.birth_date > people[j].birth_date))
                 {
                     min = people[j];
                     location = j;
