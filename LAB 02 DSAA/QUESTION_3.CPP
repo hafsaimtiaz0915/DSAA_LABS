@@ -19,17 +19,27 @@ int main()
     {
         cout << "Toy " << i + 1 << ": Rs.";
         cin >> arr[i];
-    }
-
-    for (int i = 0; i < N; i++)
-    {
         if (arr[i] <= k)
         {
             count++;
         }
     }
 
-    cout << "Maximum number of toys you can buy with Rs." << k << " are " << count << endl;
+    for (int i = 0; i < N - 1; i++)
+    {
+        for (int j = 0; j < N - i - 1; j++)
+        {
+            if (arr[j] > arr[j + 1])
+            {
+                swap(arr[j], arr[j + 1]);
+            }
+        }
+    }
+
+    cout << "Maximum number of toys are: " << count << endl;
+    cout << "The costs of toys you can buy within Rs." << k << " are: ";
+    for (int i = 0; i < count; i++)
+        cout << arr[i] << " ";
 
     return 0;
 }
