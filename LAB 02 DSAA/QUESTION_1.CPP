@@ -8,7 +8,7 @@ void printArray(int arr[], int size)
 }
 void bubbleSort(int arr[], int n)
 {
-    int count = 0;
+    int swap_count = 0;
     for (int i = 0; i < n - 1; i++)
     {
         for (int j = 0; j < n - i - 1; j++)
@@ -16,11 +16,11 @@ void bubbleSort(int arr[], int n)
             if (arr[j] > arr[j + 1])
             {
                 swap(arr[j], arr[j + 1]);
-                count += 1;
+                swap_count += 1;
             }
         }
     }
-    if (count == 0)
+    if (swap_count == 0)
     {
         cout << "Array is already sorted..." << endl;
     }
