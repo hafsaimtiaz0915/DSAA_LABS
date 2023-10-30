@@ -8,6 +8,7 @@ class sort
     int total_swap, total_comparison;
     string bestTechnique, worstTechnique;
     int bestComparison, worstComparison;
+    int bestSwap, worstSwap;
 
 public:
     sort()
@@ -19,6 +20,8 @@ public:
         worstTechnique = "";
         bestComparison = -1;
         worstComparison = -1;
+        bestSwap = -1;
+        worstSwap = -1;
     }
     sort(vector<int> &arr) : arr(arr)
     {
@@ -29,7 +32,10 @@ public:
         worstTechnique = "";
         bestComparison = -1;
         worstComparison = -1;
+        bestSwap = -1;
+        worstSwap = -1;
     }
+
     void generateRandomArray(int size)
     {
 
@@ -45,7 +51,7 @@ public:
         *var1 = *var2;
         *var2 = temp;
     }
-    void displaySortedArray()
+    void displayArray()
     {
         for (int i = 0; i < size; i++)
         {
@@ -57,13 +63,22 @@ public:
     {
         if (bestComparison == -1 || comparison < bestComparison)
         {
-            bestTechnique = technique;
-            bestComparison = comparison;
+            if (bestSwap == -1 || swap < bestSwap)
+            {
+                bestTechnique = technique;
+                bestComparison = comparison;
+                bestSwap = swap;
+              
+            }
         }
-        if (worstComparison == -1 || comparison > worstComparison)
+       else if (worstComparison == -1 || comparison > worstComparison)
         {
-            worstComparison = comparison;
-            worstTechnique = technique;
+            if (worstSwap == -1 || swap < worstSwap)
+            {
+                worstComparison = comparison;
+                worstTechnique = technique;
+                worstSwap = swap;
+            }
         }
     }
     void BestAndWorseTechnique()
@@ -73,82 +88,95 @@ public:
     }
     void SelectionSort(bool flag)
     {
+        total_swap = 0;
+        total_comparison = 0;
         int min;
-        int Swap=0;
-        
+        vector<int> temp = arr;
         for (int i = 0; i < size - 1; i++)
         {
             min = i;
             for (int j = i + 1; j < size; j++)
             {
                 total_comparison++;
-                if (arr[min] > arr[j])
+                if (temp[min] > temp[j])
                 {
-                    // cout<<arr[min]<<">"<<arr[j]<<"arr[min]"<<endl;
                     min = j;
                 }
             }
-            // cout << "minimum" << min <<"f"<<i<< endl;
+
             if (min != i)
             {
-                swap(&arr[i], &arr[min]);
-                Swap++;
-                // cout<<"faizan"<<Swap<<endl;
+                swap(&temp[i], &temp[min]);
+                total_swap++;
             }
         }
-        Analysis("SelectionSort", total_comparison, Swap);
-        if(flag)
-        { cout << "****" << "SelectionSort" << "*****";
-        cout << "\nTotal Comparisons: " << total_comparison;
-        cout << "\nTotal Swap:" << Swap << endl;}
-       
-
-        
+        Analysis("SelectionSort", total_comparison, total_swap);
+        if (flag)
+        {
+            cout << "****"
+                 << "SelectionSort"
+                 << "*****";
+            cout << "\nTotal Comparisons: " << total_comparison;
+            cout << "\nTotal Swap:" << total_swap << endl;
+        }
     }
     void BubbleSort(bool flag)
     {
+        vector<int> temp = arr;
+        total_swap = 0;
+        total_comparison = 0;
         for (int i = 0; i < size - 1; i++)
         {
             for (int j = 0; j < size - i - 1; j++)
             {
                 total_comparison++;
-                if (arr[j] > arr[j + 1])
+                if (temp[j] > temp[j + 1])
                 {
-                    swap(&arr[j], &arr[j + 1]);
+                    swap(&temp[j], &temp[j + 1]);
                     total_swap++;
                 }
             }
         }
         Analysis("BubbleSort", total_comparison, total_swap);
-         if(flag)
-        { cout << "****" << "BubbleSort" << "*****";
-        cout << "\nTotal Comparisons: " << total_comparison;
-        cout << "\nTotal Swap:" << total_swap << endl;}
-       
+        if (flag)
+        {
+            cout << "****"
+                 << "BubbleSort"
+                 << "*****";
+            cout << "\nTotal Comparisons: " << total_comparison;
+            cout << "\nTotal Swap:" << total_swap << endl;
+        }
     }
     void InsertionSort(bool flag)
     {
+        vector<int> temp = arr;
+        total_swap = 0;
+        total_comparison = 0;
         int key, j;
         for (int i = 1; i < size; i++)
         {
-            key = arr[i];
+            key = temp[i];
             j = i - 1;
-            while (j >= 0 && arr[j] > key)
+            while (j >= 0 && temp[j] > key)
             {
                 total_comparison++;
-                arr[j + 1] = arr[j];
+                temp[j + 1] = temp[j];
                 j--;
                 total_swap++;
             }
-            arr[j + 1] = key;
+            temp[j + 1] = key;
         }
-        
+
         Analysis("InsertionSort", total_comparison, total_swap);
-         if(flag)
-        { cout << "****" << "SelectionSort" << "*****";
-        cout << "\nTotal Comparisons: " << total_comparison;
-        cout << "\nTotal Swap:" << total_swap << endl;}
-       
+        if (flag)
+        {
+            cout << "****"
+                 << "InsertionSort"
+                 << "*****";
+            cout << "\nTotal Comparisons: " << total_comparison;
+            cout << "\nTotal Swap:" << total_swap << endl;
+        }
+        arr = temp;
     }
 };
 
@@ -156,66 +184,44 @@ int main()
 {
     vector<int> arr = {12, 4, 6, 7, 1};
     sort obj1;
-    // obj1.displaySortedArray();
-    // cout << endl;
-    // obj1.SelectionSort();
-    // obj1.InsertionSort();
-    // obj1.displaySortedArray();
-    // obj1.displaySortedArray();
-    // obj1.BubbleSort();
-    // obj1.displaySortedArray();
-    // obj1.BestAndWorseTechnique();
-    // cout << endl;
-    // // sort obj2;
-    // obj2.generateRandomArray(6);
-    // obj2.displaySortedArray();
-    // cout << endl;
-    // obj2.InsertionSort();
-    // obj2.displaySortedArray();
-    // obj2.SelectionSort();
-    // obj2.displaySortedArray();
-    // obj2.BubbleSort();
-    // obj2.displaySortedArray();
-    // obj2.BestAndWorseTechnique();
     int choice;
     int size;
-    cout<<"Select your sort technique\n1)Selection Sort\n2)Insertion sort\n3)BubbleSort"<<endl;
-    cin>>choice;
-    cout<<"Enter size of array:";
-    cin>>size;
-    switch(choice){
-        case 1: 
+    cout << "Select your sort technique\n1)Selection Sort\n2)Insertion sort\n3)BubbleSort" << endl;
+    cin >> choice;
+    cout << "Enter size of array:";
+    cin >> size;
+    switch (choice)
+    {
+    case 1:
         obj1.generateRandomArray(size);
-        obj1.displaySortedArray();
-                obj1.InsertionSort(false);
-                obj1.BubbleSort(false);
-                obj1.SelectionSort(true);
-                
-                cout<<"After Sorting"<<endl;
-                obj1.displaySortedArray();
-                obj1.BestAndWorseTechnique();
-                
-                break;
-    
-        case 2: obj1.generateRandomArray(size);
-                obj1.SelectionSort(false);
-                obj1.BubbleSort(false);
-                obj1.InsertionSort(true);
-                cout<<"After Sorting"<<endl;
-                obj1.displaySortedArray();
-                obj1.BestAndWorseTechnique();
-                break;
-    
-        case 3: obj1.generateRandomArray(size);
-                obj1.InsertionSort(false);
-                obj1.SelectionSort(false);
-                obj1.BubbleSort(true);
-                cout<<"After Sorting"<<endl;
-                obj1.displaySortedArray();
-                obj1.BestAndWorseTechnique();
-                break;
-           
-}
+        obj1.displayArray();
+        obj1.SelectionSort(true);
+        obj1.BubbleSort(false);
+        obj1.InsertionSort(false);
+        cout << "After Sorting" << endl;
+        obj1.displayArray();
+        obj1.BestAndWorseTechnique();
+        break;
 
+    case 2:
+        obj1.generateRandomArray(size);
+        obj1.displayArray();
+        obj1.SelectionSort(false);
+        obj1.BubbleSort(false);
+        obj1.InsertionSort(true);
+        cout << "After Sorting" << endl;
+        obj1.displayArray();
+        obj1.BestAndWorseTechnique();
+        break;
 
+    case 3:
+        obj1.generateRandomArray(size);
+        obj1.SelectionSort(false);
+        obj1.BubbleSort(true);
+        obj1.InsertionSort(false);
+        cout << "After Sorting" << endl;
+        obj1.displayArray();
+        obj1.BestAndWorseTechnique();
+        break;
+    }
 }
