@@ -231,8 +231,9 @@ int main()
 {
     SinglyLinkedList List;
     char choice;
-     cout << "\n*******Choose an operation For LinkedList*****\n"
-             << endl;
+    do
+    {
+         cout << "\n*******Choose an operation For LinkedList*****\n"<< endl;
         cout << "\t[a] Insert a node at head" << endl;
         cout << "\t[b] Insert a node at tail/end/back" << endl;
         cout << "\t[c] Insert a node at any position" << endl;
@@ -242,9 +243,6 @@ int main()
         cout << "\t[g] Delete a node at any position" << endl;
         cout << "\t[h] Display the List" << endl;
         cout << "\t[i] Quit" << endl;
-
-    do
-    {
         cout << "\n\t\t Your Choice: ";
         cin >> choice;
         cout << "========================================================" << endl;
