@@ -32,6 +32,7 @@ public:
         if (head == NULL)
         {
             head = newNode;
+            cout << "\n\t\t Value Added." << endl;
         }
         else
         {
@@ -41,6 +42,7 @@ public:
                 ptr = ptr->next;
             }
             ptr->next = newNode;
+            cout << "\n\t\t Value Added." << endl;
         }
     }
 
@@ -50,6 +52,7 @@ public:
         Node *newNode = new Node(data);
         newNode->next = head;
         head = newNode;
+        cout << "\n\t\t Value Added." << endl;
     }
 
     // Insert a node with the given data at the specified position
@@ -83,6 +86,7 @@ public:
             }
             newNode->next = temp->next;
             temp->next = newNode;
+            cout << "\n\t\t Value Added." << endl;
         }
     }
 
@@ -100,6 +104,7 @@ public:
             Node *temp = head;
             head = head->next;
             delete temp;
+            cout << "\n\t\t Node with Value " << data << " is Deleted." << endl;
             return;
         }
 
@@ -111,6 +116,7 @@ public:
                 Node *toDelete = temp->next;
                 temp->next = temp->next->next;
                 delete toDelete;
+                cout << "\n\t\t Node with Value " << data << " is Deleted." << endl;
                 return;
             }
             temp = temp->next;
@@ -131,8 +137,11 @@ public:
             Node *temp = head;
             head = head->next;
             delete temp;
+            cout << "\n\t\t Head is Deleted." << endl;
         }
     }
+
+    // deleting the tail
     void deleteTail()
     {
         if (head == NULL)
@@ -143,6 +152,7 @@ public:
         {
             delete head;
             head = NULL;
+            cout << "\n\t\t Tail is Deleted." << endl;
         }
         else
         {
@@ -153,6 +163,7 @@ public:
             }
             delete temp->next;
             temp->next = NULL;
+            cout << "\n\t\t Tail is Deleted." << endl;
         }
     }
 
@@ -186,18 +197,23 @@ public:
         Node *nodeToDelete = temp->next;
         temp->next = temp->next->next;
         delete nodeToDelete;
+        cout << "\n\t\t Node at position " << position << " is Deleted." << endl;
     }
 
     // Display the linked list
     void displayList()
     {
         Node *temp = head;
+        cout << "\n*Displaying Linked List*\n"
+             << endl;
+        cout << "\t\t";
         while (temp != NULL)
         {
             cout << temp->data << " -> ";
             temp = temp->next;
         }
         cout << "NULL" << endl;
+        cout << "\n=========================================" << endl;
     }
 
     // Destructor to free memory when the object is destroyed
@@ -213,58 +229,99 @@ public:
 };
 int main()
 {
-    SinglyLinkedList list;
+    SinglyLinkedList List;
+    char choice;
+     cout << "\n*******Choose an operation For LinkedList*****\n"
+             << endl;
+        cout << "\t[a] Insert a node at head" << endl;
+        cout << "\t[b] Insert a node at tail/end/back" << endl;
+        cout << "\t[c] Insert a node at any position" << endl;
+        cout << "\t[d] Delete a node by value" << endl;
+        cout << "\t[e] Delete head" << endl;
+        cout << "\t[f] Delete tail" << endl;
+        cout << "\t[g] Delete a node at any position" << endl;
+        cout << "\t[h] Display the List" << endl;
+        cout << "\t[i] Quit" << endl;
 
-    cout << "\n=======================================================\n" << endl;
-    cout << "Initial Linked List: " <<endl ;
-    list.displayList();
+    do
+    {
+        cout << "\n\t\t Your Choice: ";
+        cin >> choice;
+        cout << "========================================================" << endl;
 
-    // Append nodes and display
-    cout << "\n=======================================================\n" << endl;
-    cout << "\nAppending 10: " <<endl;
-    list.appendNode(10);
-    list.displayList();
-
-    cout << "\n=======================================================\n" << endl;
-    cout << "\nAppending 20: " <<endl;
-    list.appendNode(20);
-    list.displayList();
-
-    // Prepend a node and display
-    cout << "\n=======================================================\n" << endl;
-    cout << "\nPrepending 5: " <<endl ;
-    list.prependNode(5);
-    list.displayList();
-
-    // Insert a node and display
-    cout << "\n=======================================================\n" << endl;
-    cout << "\nInserting 15 at position 1: " <<endl ;
-    list.insertNode(15, 1);
-    list.displayList();
-
-    // Delete a node and display
-    cout << "\n=======================================================\n" << endl;
-    cout << "\nDeleting node with value 15: " <<endl ;
-    list.deleteNode(15);
-    list.displayList();
-
-    // Delete the head node and display
-    cout << "\n=======================================================\n" << endl;
-    cout << "\nDeleting the head node: " <<endl ;
-    list.deleteHead();
-    list.displayList();
-
-    // Delete the tail node and display
-    cout << "\n=======================================================\n" << endl;
-    cout << "\nDeleting the tail node: " <<endl;
-    list.deleteTail();
-    list.displayList();
-
-    // Delete a node at a specified position and display
-    cout << "\n=======================================================\n" << endl;
-    cout << "\nDeleting node at position 1: " <<endl ;
-    list.deleteAtPosition(1);
-    list.displayList();
+        int value, position;
+        switch (choice)
+        {
+        case 'a':
+        case 'A':
+            cout << "\nEnter the value(integer) to insert at the head: ";
+            cin >> value;
+            List.prependNode(value);
+            List.displayList();
+            cout << endl;
+            break;
+        case 'b':
+        case 'B':
+            cout << "\nEnter the value(integer) to insert at the tail: ";
+            cin >> value;
+            List.appendNode(value);
+            List.displayList();
+            cout << endl;
+            break;
+        case 'c':
+        case 'C':
+            cout << "\nEnter the value(integer) to insert: ";
+            cin >> value;
+            cout << "Enter the position to insert at: ";
+            cin >> position;
+            List.insertNode(value, position);
+            List.displayList();
+            cout << endl;
+            break;
+        case 'd':
+        case 'D':
+            cout << "\nEnter the value(integer) to delete: ";
+            cin >> value;
+            List.deleteNode(value);
+            List.displayList();
+            cout << endl;
+            break;
+        case 'e':
+        case 'E':
+            List.deleteHead();
+            List.displayList();
+            cout << endl;
+            break;
+        case 'f':
+        case 'F':
+            List.deleteTail();
+            List.displayList();
+            cout << endl;
+            break;
+        case 'g':
+        case 'G':
+            cout << "\nEnter the position to delete: ";
+            cin >> position;
+            List.deleteAtPosition(position);
+            List.displayList();
+            cout << endl;
+            break;
+        case 'h':
+        case 'H':
+            List.displayList();
+            cout << endl;
+            break;
+        case 'i':
+        case 'I':
+            return 0;
+        default:
+            cout << "\nInvalid choice! Please try again." << endl;
+            break;
+        }
+        cout << "Do you want to proceed press [Y] to continue or any key to stop. ";
+        cin >> choice;
+        cin.ignore();
+    } while ((choice == 'y') || (choice == 'Y'));
 
     return 0;
 }
