@@ -163,9 +163,11 @@ void display()
              << endl;
         if (head != NULL)
         {
+        	        	cout << "\t";
+
             do
             {
-                cout << temp->data << " -> ";
+                cout << temp->data << " <-> ";
                 temp = temp->next;
             } while (temp != head);
             cout << "(head)" << temp->data << endl;
@@ -174,7 +176,7 @@ void display()
         {
             cout << "Your linked list is empty" << endl;
         }
-        cout << "\n=========================================" << endl;
+        cout << "\n=========================================================================" << endl;
     }
     // Destructor
     ~CircularDoublelyLinkedList()
@@ -195,7 +197,7 @@ int main()
     do
     {       
 	 cout << "====================================================================================" << endl;
-        cout << "\n\t\t\tChoose an operation For Doublely LinkedList\n"
+        cout << "\n\t\t\tChoose an operation For Circular LinkedList\n"
              << endl;
         cout << "\t\t[a] Insert a node at head" << endl;
         cout << "\t\t[b] Insert a node at tail/end/back" << endl;
@@ -250,7 +252,7 @@ int main()
             cout << "\nInvalid choice! Please try again." << endl;
             break;
         }
-    } while ((choice != 'e') || (choice != 'E'));
+    } while ((choice != 'e') && (choice != 'E'));
 
     return 0;
 }
