@@ -57,40 +57,58 @@ public:
         cout << "\n\t\t Value Added." << endl;
     }
     // Insert node at any position
-    void insertNode(int value, int position)
+  void insertNode(int value, int position)
+{
+    if (position <= 0)
     {
-        if (position < 0)
-        {
-            cout << "Invalid Position" << endl;
-            return;
-        }
-        Node *newNode = new Node(value);
+        cout << "Invalid Position" << endl;
+        return;
+    }
 
-        if (position == 0)
+    Node *newNode = new Node(value);
+
+    if (head == NULL)
+    {
+        if (position == 1)
         {
-            prependNode(value);
+            head = newNode;
+            return;
         }
         else
         {
-            Node *temp = head;
-            int index = 0;
-            while (index < position - 1 && temp != NULL)
-            {
-                temp = temp->next;
-                index++;
-            }
-            if (temp == NULL)
-            {
-                cout << "Position out of bounds" << endl;
-                return;
-            }
-            newNode->prev = temp;
-            newNode->next = temp->next;
-            temp->next = newNode;
-            newNode->next->prev = newNode;
-            cout << "\n\t\t Value Added." << endl;
+            cout << "Invalid position. List is empty." << endl;
+            return;
         }
     }
+
+
+    Node *temp = head;
+    int index = 1;
+
+    while (temp->next != NULL && index < position - 1)
+    {
+        temp = temp->next;
+        index++;
+    }
+
+    if (index == position - 1)
+    
+        newNode->prev = temp;
+        newNode->next = temp->next;
+
+        if (temp->next != NULL)
+        {
+            temp->next->prev = newNode;
+        }
+
+        temp->next = newNode;
+        cout << "\n\t\t Value Added." << endl;
+    }
+    else
+    {
+        cout << "Position out of bounds" << endl;
+    }
+}
 
     // Delete a node by value
     void deleteNode(int value)
