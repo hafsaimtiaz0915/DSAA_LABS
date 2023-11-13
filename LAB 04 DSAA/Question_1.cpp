@@ -57,7 +57,7 @@ public:
         cout << "\n\t\t Value Added." << endl;
     }
     // Insert node at any position
-  void insertNode(int value, int position)
+    void insertNode(int value, int position)
 {
     if (position <= 0)
     {
@@ -81,7 +81,6 @@ public:
         }
     }
 
-
     Node *temp = head;
     int index = 1;
 
@@ -92,7 +91,7 @@ public:
     }
 
     if (index == position - 1)
-    
+    {
         newNode->prev = temp;
         newNode->next = temp->next;
 
