@@ -101,11 +101,11 @@ string infixToPostfix(const string &infixExpression)
         {
             postfixExpression += c;
         }
-        else if (c == '(')
+        else if (c == '(' || c == '{' || c == '[')
         {
             operatorStack.push(c);
         }
-        else if (c == ')')
+        else if (c == ')'|| c == '}' || c == ']')
         {
             while (!operatorStack.IsEmpty() && operatorStack.get_top() != '(')
             {
