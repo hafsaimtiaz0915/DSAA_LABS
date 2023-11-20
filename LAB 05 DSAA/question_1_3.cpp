@@ -65,16 +65,21 @@ bool isExpressionValid(const string &expression)
         {
             return false;
         }
-        if(c==','||c=='@'||c=='!'||c=='#'||c=='$'||c=='%'||c=='&'||c=='<'||c=='>'||c=='.'||c=='_'||c==':'||c==';'||c=='?'){
-            return false;
-        }
-        if (isOperand(c))
+        else if (c >= '0' && c <= '9')
         {
             operandCount++;
+        }
+        else if (c == '[' || c == ']' || c == '(' || c == ')' || c == '{' || c == '}')
+        {
+            continue;
         }
         else if (isOperator(c))
         {
             operatorCount++;
+        }
+        else
+        {
+            return false;
         }
     }
     return operandCount == operatorCount + 1;
@@ -101,11 +106,11 @@ string infixToPostfix(const string &infixExpression)
         {
             postfixExpression += c;
         }
-        else if (c == '(' || c == '{' || c == '[')
+        else if (c == '(')
         {
             operatorStack.push(c);
         }
-        else if (c == ')'|| c == '}' || c == ']')
+        else if (c == ')')
         {
             while (!operatorStack.IsEmpty() && operatorStack.get_top() != '(')
             {
@@ -181,7 +186,7 @@ int main()
     char choice;
     do
     {
-         system("CLS");
+        system("CLS");
         string infixExpression;
         cout << "\n========================================================" << endl;
         cout << "\n\tEnter an infix expression: ";
@@ -206,7 +211,8 @@ int main()
         else
         {
             cout << "\n========================================================" << endl;
-            cout << "\n\tExpression is not correct\n" << endl;
+            cout << "\n\tExpression is not correct\n"
+                 << endl;
         }
         cout << "========================================================" << endl;
         cout << "\n\tDo you want to solve another expression press [Y] to continue or any key to stop. ";
