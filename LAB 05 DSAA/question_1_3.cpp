@@ -65,6 +65,9 @@ bool isExpressionValid(const string &expression)
         {
             return false;
         }
+        if(c==','||c=='@'||c=='!'||c=='#'||c=='$'||c=='%'||c=='&'||c=='<'||c=='>'||c=='.'||c=='_'||c==':'||c==';'||c=='?'){
+            return false;
+        }
         if (isOperand(c))
         {
             operandCount++;
