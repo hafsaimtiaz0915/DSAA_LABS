@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 template<class DT>
-
 class Node {
 public:
     DT data;
@@ -29,8 +28,10 @@ public:
 
 //puts element at the rear end of the Queue if it is not full. Must be O(1) 
 void Put(){
-	DT element ;
-        cin >> element;
+	
+	DT element;
+	cin >> element;
+	
 	Node<DT> *newNode = new Node<DT>(element);
 
         if (IsEmpty())
@@ -130,70 +131,55 @@ int getSize(){
         }
     }
 };
-
 int main() {
-    char choice;
-    int size;
-
-    cout << "Enter the Capacity of Queue: ";
-    cin >> size;
-
-    Queue<int> *q = new Queue<int>(size);
+    string choice;
+	int size;
+		cout << "Enter the Capacity of Queue: ";;
+			cin >> size;
+			    Queue<int> *q = new Queue<int>(size);
 
     do {
         cout << "\n\n****Choose an operation For Queue**\n" << endl;
-        cout << "\t[a] Enqueue\n";
-        cout << "\t[b] Dequeue\n";
-        cout << "\t[c] Size of Queue\n";
-        cout << "\t[d] Display Queue\n";
-        cout << "\t[e] Resize Queue\n";
-        cout << "\n\tYour Choice: ";
-        cin >> choice;
-         cout << "========================================================" << endl;
+        cout << "\t[A] Enqueue\n" << endl;
+        cout << "\t[B] Dequeue\n" << endl;
+        cout << "\t[c] Size of Queue\n" << endl;
+        cout << "\t[D] Display Queue\n" << endl;
+        cout << "\t[E] Resize Queue\n" << endl;
+        cout << "\t[F] Exit\n" << endl;
+        	cout << "\n\t\t Your Choice: ";
+       		 	cin >> choice;
 
-        switch (choice) {
-             case 'A':
-        case 'a':
-                cout << "\n\nEnter the element to enqueue: ";
-            		q->Put();
-                break;
-             case 'B':
-        case 'b':
-                if (!q->IsEmpty()) {
-                    cout <<"\n\nDequeued element: " << q->Get() << endl;
-                } else
-                    cout << "\n\nQueue is empty. Cannot dequeue.\n";
-                break;
-             case 'C':
-        case 'c':
-                cout << "\nSize of Queue: " << q->getSize() << endl;
-                break;
-             case 'D':
-        case 'd':
-                q->Display();
-                break;
-             case 'E':
-        case 'e': {
-                int newCapacity;
-                cout << "\n\nEnter the new capacity: ";
-                cin >> newCapacity;
-                q->Resize(newCapacity);
-                break;
-            }
-
-            default:
-                cout << "\nInvalid choice. Please enter a valid option.\n";
-                break;
+        if (choice == "A" || choice == "a") {
+        	cout << "\n\nEnter the element to enqueue: ";
+                q->Put();
         }
-          cout << "Do you want to proceed press [Y] to continue or any key to stop. ";
-        cin >> choice;
-        cin.ignore();
+		else if (choice == "B" || choice == "b") {
+                if (!q->IsEmpty()){
+                    cout << "\n\nDequeued element: " << q->Get() << endl;
+                }else
+                    cout << "\n\nQueue is empty.Cannot dequeue.\n";
+    	} 
+		else if (choice == "C" || choice == "c") {
+            cout << "\nSize of Queue: " << q->getSize()<< endl;
+    	}
+    	else if (choice == "D" || choice == "d") 
+			q->Display();
+		else if (choice == "E" || choice == "e"){
+			int newCapacity;
+				cout << "\n\nEnter the new capacity: ";
+            		cin >> newCapacity;
+            q->Resize(newCapacity);
+    	}
+		else if (choice == "F" || choice == "f")
+					cout << "\n\tExiting program.\n";
+		else
+                cout << "\n\tInvalid choice. Please enter a valid option.\n";
+                
+		cout << "\n===============================================================" << endl;
 
-        cout << "\n===============================================================" << endl;
-
-    } while ((choice == 'y') || (choice == 'Y'));
-
-    delete q;
-
-    return 0;
+    } while ((choice != "F") && (choice != "f"));
+  
+      	delete q; 
+    
+	return 0;
 }
