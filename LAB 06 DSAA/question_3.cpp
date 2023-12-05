@@ -4,12 +4,13 @@ using namespace std;
 template <class T>
 class Queue
 {
-private:
-    int front, rear, size;
+    private:
+ int front, rear, size;
     unsigned capacity;
-    T *array;
+    T *array;   
 
 public:
+
     Queue(int siz) : front(-1), rear(-1), size(0), capacity(siz)
     {
         array = new T[capacity];
