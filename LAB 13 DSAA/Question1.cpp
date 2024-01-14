@@ -49,16 +49,7 @@ public:
         }
         cout << endl;
     }
-    void displayGraph() {
-        cout << "Adjacency List:\n";
-        for (int i = 0; i < vertices; ++i) {
-            cout << i << " -> ";
-            for (int neighbor : adjacencyList[i]) {
-                cout << neighbor << " ";
-            }
-            cout << endl;
-        }
-    }
+    
 };
 
 int main() {
@@ -88,7 +79,7 @@ int main() {
 
     cout << endl;
 
-    graph.displayGraph();
+    
 
     do {
         cout << "\nEnter the starting vertex for DFS (In Integer): ";
